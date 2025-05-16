@@ -32,7 +32,6 @@
             this.txtConfPass = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtLogin = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -69,25 +68,13 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(342, 287);
+            this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label3.Location = new System.Drawing.Point(355, 287);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 13);
             this.label3.TabIndex = 35;
             this.label3.Text = "Already have an account?";
-            // 
-            // txtLogin
-            // 
-            this.txtLogin.BackColor = System.Drawing.Color.Transparent;
-            this.txtLogin.FlatAppearance.BorderSize = 0;
-            this.txtLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtLogin.ForeColor = System.Drawing.Color.Blue;
-            this.txtLogin.Location = new System.Drawing.Point(464, 282);
-            this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(54, 23);
-            this.txtLogin.TabIndex = 34;
-            this.txtLogin.Text = "Login";
-            this.txtLogin.UseVisualStyleBackColor = false;
-            this.txtLogin.Click += new System.EventHandler(this.txtLogin_Click);
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtPassword
             // 
@@ -124,6 +111,7 @@
             // 
             // txtRegister
             // 
+            this.txtRegister.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtRegister.Location = new System.Drawing.Point(464, 250);
             this.txtRegister.Name = "txtRegister";
             this.txtRegister.Size = new System.Drawing.Size(75, 23);
@@ -141,13 +129,13 @@
             this.Controls.Add(this.txtConfPass);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtRegister);
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
@@ -161,7 +149,6 @@
         private System.Windows.Forms.TextBox txtConfPass;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button txtLogin;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label label2;

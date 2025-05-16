@@ -31,18 +31,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.cboType = new System.Windows.Forms.ComboBox();
+            this.txtType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtBreed = new System.Windows.Forms.TextBox();
-            this.txtAge = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dgvPets = new System.Windows.Forms.DataGridView();
+            this.backBtn = new System.Windows.Forms.Button();
+            this.addBtn = new System.Windows.Forms.Button();
+            this.txtID = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPets)).BeginInit();
             this.SuspendLayout();
@@ -74,13 +77,13 @@
             this.txtName.TabIndex = 2;
             this.txtName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // cboType
+            // txtType
             // 
-            this.cboType.FormattingEnabled = true;
-            this.cboType.Location = new System.Drawing.Point(115, 80);
-            this.cboType.Name = "cboType";
-            this.cboType.Size = new System.Drawing.Size(121, 21);
-            this.cboType.TabIndex = 3;
+            this.txtType.FormattingEnabled = true;
+            this.txtType.Location = new System.Drawing.Point(115, 80);
+            this.txtType.Name = "txtType";
+            this.txtType.Size = new System.Drawing.Size(121, 21);
+            this.txtType.TabIndex = 3;
             // 
             // label3
             // 
@@ -127,23 +130,14 @@
             this.txtBreed.Size = new System.Drawing.Size(100, 20);
             this.txtBreed.TabIndex = 8;
             // 
-            // txtAge
+            // txtStatus
             // 
-            this.txtAge.FormattingEnabled = true;
-            this.txtAge.Location = new System.Drawing.Point(115, 107);
-            this.txtAge.Name = "txtAge";
-            this.txtAge.Size = new System.Drawing.Size(121, 21);
-            this.txtAge.TabIndex = 9;
-            this.txtAge.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(115, 230);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 10;
-            this.textBox3.Text = "Add";
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.txtStatus.FormattingEnabled = true;
+            this.txtStatus.Location = new System.Drawing.Point(115, 107);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(121, 21);
+            this.txtStatus.TabIndex = 9;
+            this.txtStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // textBox4
             // 
@@ -176,26 +170,67 @@
             this.dgvPets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPets.Location = new System.Drawing.Point(34, 256);
             this.dgvPets.Name = "dgvPets";
+            this.dgvPets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPets.Size = new System.Drawing.Size(393, 175);
             this.dgvPets.TabIndex = 14;
+            this.dgvPets.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPets_CellClick);
+            // 
+            // backBtn
+            // 
+            this.backBtn.Location = new System.Drawing.Point(34, 228);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(75, 23);
+            this.backBtn.TabIndex = 15;
+            this.backBtn.Text = "Back";
+            this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            // 
+            // addBtn
+            // 
+            this.addBtn.Location = new System.Drawing.Point(115, 228);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(100, 23);
+            this.addBtn.TabIndex = 16;
+            this.addBtn.Text = "Add";
+            this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            // 
+            // txtID
+            // 
+            this.txtID.Location = new System.Drawing.Point(304, 54);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(100, 20);
+            this.txtID.TabIndex = 17;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(277, 57);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(21, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "ID:";
             // 
             // Masterfiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(473, 453);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtID);
+            this.Controls.Add(this.addBtn);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.dgvPets);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.txtAge);
+            this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.txtBreed);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.cboType);
+            this.Controls.Add(this.txtType);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -214,17 +249,20 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.ComboBox cboType;
+        private System.Windows.Forms.ComboBox txtType;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtBreed;
-        private System.Windows.Forms.ComboBox txtAge;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox txtStatus;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dgvPets;
+        private System.Windows.Forms.Button backBtn;
+        private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Label label7;
     }
 }

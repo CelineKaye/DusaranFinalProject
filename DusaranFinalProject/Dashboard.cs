@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibrarySystem;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +15,8 @@ namespace DusaranFinalProject
     {
         public static string user_type = "";
 
-        public Dashboard(string userType)
+        public Dashboard()
         {
-            user_type = userType;
-
             InitializeComponent();
         }
 
@@ -39,6 +38,19 @@ namespace DusaranFinalProject
         private void Dashboard_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void masterFileManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Masterfiles filemanager = new Masterfiles();
+            this.Hide();
+            filemanager.ShowDialog();
+        }
+        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin login = new frmLogin();
+            login.ShowDialog();
         }
     }
 }

@@ -8,30 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DusaranFinalProject;
 using LibrarySystem;
+using MySql.Data.MySqlClient;
 
 namespace DusaranFinalProject
 {
     public partial class Form2 : Form
     {
-        private OleDbConnection conn;
-
+        static MySqlConnection conn = new MySqlConnection("server = localhost; user = root; database = animaldb; password =");
+        static MySqlCommand cmd;
+        static MySqlDataReader reader;
         public Form2()
         {
             InitializeComponent();
-            conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\User\Downloads\DusaranFinalProject-1\DusaranFinalProject\CatandDogs.mdb");
-
         }
 
-        private string HashPassword(string password)
-        {
-            using (System.Security.Cryptography.SHA256 sha256 = System.Security.Cryptography.SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(password);
-                byte[] hash = sha256.ComputeHash(bytes);
-                return BitConverter.ToString(hash).Replace("-", "").ToLower();
-            }
-        }
         private void Form2_Load(object sender, EventArgs e)
         {
 
@@ -45,35 +37,41 @@ namespace DusaranFinalProject
 
             if (password != confirmPassword)
             {
-                lblError.Text = "Passwords do not match!";
+                MessageBox.Show("Password doesn't match, try again", "Password mismatch");
                 return;
             }
-
-            string hashedPassword = HashPassword(password);
 
             try
             {
                 conn.Open();
 
-                string checkQuery = "SELECT COUNT(*) FROM [Users] WHERE Username = '" + username + "'";
-                OleDbCommand checkCmd = new OleDbCommand(checkQuery, conn);
-                int userCount = (int)checkCmd.ExecuteScalar();
+                string checkQuery = "SELECT COUNT(*) FROM users WHERE Username = '" + username + "'";
+                cmd = new MySqlCommand(checkQuery, conn);
+
+                int userCount = (int)cmd.ExecuteNonQuery();
 
                 if (userCount > 0)
                 {
-                    lblError.Text = "Username already exists!";
-                    conn.Close();
+                    MessageBox.Show("Username already exists!");
                     return;
                 }
 
-                string query = "INSERT INTO [Users] (Username, [Password], UserType) VALUES ('" + username + "', '" + hashedPassword + "', 'common')";
-                OleDbCommand cmd = new OleDbCommand(query, conn);
-                cmd.ExecuteNonQuery();
+                if (username != null || password != null || confirmPassword != null)
+                {
+                    string query = "INSERT INTO users (Username, Password, confirmPassword) VALUES (@user, @pass, @cpass)";
+                    cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@user", username);
+                    cmd.Parameters.AddWithValue("@pass", password);
+                    cmd.Parameters.AddWithValue("@cpass", confirmPassword);
+                    cmd.ExecuteNonQuery();
 
-                lblError.ForeColor = Color.Green;
-                lblError.Text = "Registration successful!";
-
-                this.Hide();
+                    MessageBox.Show("Account successfully created !");
+                }
+                else
+                {
+                    MessageBox.Show("Please fill up everything.");
+                    return;
+                }
                
             }
             catch (Exception ex)
@@ -90,6 +88,13 @@ namespace DusaranFinalProject
         {
             frmLogin Login = new frmLogin();
             Login.Show();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            frmLogin login = new frmLogin();
+            this.Hide();
+            login.ShowDialog();
         }
     }
 }

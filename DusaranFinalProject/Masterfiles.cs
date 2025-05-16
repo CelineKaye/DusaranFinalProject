@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,31 +11,70 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace DusaranFinalProject
 {
     public partial class Masterfiles : Form
     {
-        private OleDbConnection conn;
-
+        static MySqlConnection conn = new MySqlConnection("server = localhost; user = root; database = animaldb; password =");
+        MySqlCommand cmd;
+        MySqlDataAdapter adapter;
+        MySqlDataReader reader;
+        int selectedPet = -1;
         public Masterfiles()
         {
             InitializeComponent();
-            conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\User\Downloads\DusaranFinalProject-1\DusaranFinalProject\CatandDogs.mdb");
+            refreshGrid();
+            dgvPets.ReadOnly = true;
+            dgvPets.AllowUserToDeleteRows = false;
+            dgvPets.AllowUserToResizeColumns = false;
+            dgvPets.AllowUserToResizeRows = false;
+            dgvPets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPets.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvPets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPets.AllowUserToAddRows = false;
+            dgvPets.RowHeadersVisible = false;
+            dgvPets.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            txtID.ReadOnly = true;
+        }
 
-            LoadPets();
-
+        private void refreshGrid()
+        {
+            string query = "select ID, Name, Type, Breed, Status from pets;";
+            try
+            {
+                conn.Open();
+                adapter = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dgvPets.DataSource = null;
+                dgvPets.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
         private void LoadPets()
         {
-            conn.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT * FROM tblPets", conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dgvPets.DataSource = dt;
-            conn.Close();
-        }
+            try
+            {
+                string query = "select ID, Name, Type, Breed, Status from pets;";
+                adapter = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dgvPets.DataSource = dt;
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -60,19 +101,6 @@ namespace DusaranFinalProject
 
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-            conn.Open();
-            OleDbCommand cmd = new OleDbCommand("INSERT INTO tblPets (Name, Type, Breed, Age, Status) VALUES (@name, @type, @breed, @age, 'Available')", conn);
-            cmd.Parameters.AddWithValue("@name", txtName.Text);
-            cmd.Parameters.AddWithValue("@type", cboType.Text);
-            cmd.Parameters.AddWithValue("@breed", txtBreed.Text);
-            cmd.Parameters.AddWithValue("@age", txtAge.Text);
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            LoadPets();
-        }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
@@ -87,6 +115,59 @@ namespace DusaranFinalProject
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            Dashboard admin = new Dashboard();
+            this.Hide();
+            admin.ShowDialog();
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            string name = txtName.Text;
+            string type = txtType.Text;
+            string status = txtStatus.Text;
+            string breed = txtBreed.Text;
+
+            
+
+            try
+            {
+                conn.Open();
+                string query = "INSERT INTO pets (Name, Type, Breed, Status) VALUES (@name, @type, @breed, @status);";
+                cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@type", type);
+                cmd.Parameters.AddWithValue("@breed", breed);
+                cmd.Parameters.AddWithValue("@status", status);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Pet successfully added.");
+                LoadPets();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void dgvPets_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvPets.Rows[e.RowIndex];
+                selectedPet = Convert.ToInt32(row.Cells["ID"].Value);
+
+                txtID.Text = row.Cells["ID"].Value.ToString();
+                txtName.Text = row.Cells["Name"].Value.ToString();
+                txtType.Text = row.Cells["Type"].Value.ToString();
+                txtBreed.Text = row.Cells["Breed"].Value.ToString();
+                txtStatus.Text = row.Cells["Status"].Value.ToString();
+            }
         }
     }
 }

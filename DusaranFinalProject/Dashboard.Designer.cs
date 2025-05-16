@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.masterFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.booksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barrowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.borrowReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.masterFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.masterFileManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,21 +54,6 @@
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // masterFilesToolStripMenuItem
-            // 
-            this.masterFilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.booksToolStripMenuItem});
-            this.masterFilesToolStripMenuItem.Name = "masterFilesToolStripMenuItem";
-            this.masterFilesToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
-            this.masterFilesToolStripMenuItem.Text = "Master Files";
-            // 
-            // booksToolStripMenuItem
-            // 
-            this.booksToolStripMenuItem.Name = "booksToolStripMenuItem";
-            this.booksToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.booksToolStripMenuItem.Text = "Books";
-            this.booksToolStripMenuItem.Click += new System.EventHandler(this.booksToolStripMenuItem_Click);
-            // 
             // transactionToolStripMenuItem
             // 
             this.transactionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -81,7 +66,7 @@
             // 
             this.barrowsToolStripMenuItem.Name = "barrowsToolStripMenuItem";
             this.barrowsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.barrowsToolStripMenuItem.Text = "Barrowed";
+            this.barrowsToolStripMenuItem.Text = "Transaction History";
             this.barrowsToolStripMenuItem.Click += new System.EventHandler(this.barrowsToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
@@ -95,14 +80,30 @@
             // borrowReportToolStripMenuItem
             // 
             this.borrowReportToolStripMenuItem.Name = "borrowReportToolStripMenuItem";
-            this.borrowReportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.borrowReportToolStripMenuItem.Text = "Borrow Report";
+            this.borrowReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.borrowReportToolStripMenuItem.Text = "Report";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
+            // 
+            // masterFilesToolStripMenuItem
+            // 
+            this.masterFilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.masterFileManagerToolStripMenuItem});
+            this.masterFilesToolStripMenuItem.Name = "masterFilesToolStripMenuItem";
+            this.masterFilesToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.masterFilesToolStripMenuItem.Text = "Master Files";
+            // 
+            // masterFileManagerToolStripMenuItem
+            // 
+            this.masterFileManagerToolStripMenuItem.Name = "masterFileManagerToolStripMenuItem";
+            this.masterFileManagerToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.masterFileManagerToolStripMenuItem.Text = "Master File Manager";
+            this.masterFileManagerToolStripMenuItem.Click += new System.EventHandler(this.masterFileManagerToolStripMenuItem_Click);
             // 
             // Dashboard
             // 
@@ -111,6 +112,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Dashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -123,12 +125,12 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem masterFilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem booksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barrowsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem borrowReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem masterFilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem masterFileManagerToolStripMenuItem;
     }
 }
