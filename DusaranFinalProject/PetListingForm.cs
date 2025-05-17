@@ -8,20 +8,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LibrarySystem;
+using MySql.Data.MySqlClient;
 
 namespace DusaranFinalProject
 {
     public partial class PetListingForm : Form
     {
-        private OleDbConnection conn;
+        static MySqlConnection conn = new MySqlConnection("server = localhost; user = root; database = animaldb; password =");
+        MySqlCommand cmd;
+        MySqlDataReader reader;
+        MySqlDataAdapter adapter;
 
         int currentUserID;
 
         public PetListingForm()
         {
             InitializeComponent();
-            conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\User\Downloads\DusaranFinalProject-1\DusaranFinalProject\CatandDogs.mdb");
-
+            dgvPetList.ReadOnly = true;
+            dgvPetList.AllowUserToDeleteRows = false;
+            dgvPetList.AllowUserToResizeColumns = false;
+            dgvPetList.AllowUserToResizeRows = false;
+            dgvPetList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPetList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvPetList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPetList.AllowUserToAddRows = false;
+            dgvPetList.RowHeadersVisible = false;
+            dgvPetList.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            //txtID.ReadOnly = true;
         }
         private void LoadPets()
         {
@@ -29,10 +43,10 @@ namespace DusaranFinalProject
             {
                 conn.Open();
 
-                string query = "SELECT * FROM Pets WHERE Status = 'Available'";
-                OleDbDataAdapter da = new OleDbDataAdapter(query, conn);
+                string query = "SELECT * FROM Pets WHERE Status = 'Available';";
+                adapter = new MySqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
-                da.Fill(dt);
+                adapter.Fill(dt);
 
                 dgvPetList.DataSource = dt;
             }
@@ -42,8 +56,7 @@ namespace DusaranFinalProject
             }
             finally
             {
-                if (conn.State == ConnectionState.Open)
-                    conn.Close();
+                conn.Close();
             }
         }
 
@@ -61,10 +74,22 @@ namespace DusaranFinalProject
 
         private void button3_Click(object sender, EventArgs e)
         {
-
             if (dgvPetList.SelectedRows.Count == 0) return;
-            int petId = Convert.ToInt32(dgvPetList.SelectedRows[0].Cells["PetID"].Value);
-            new AdoptionApplicationForm(petId, currentUserID).Show();
+            int petId = Convert.ToInt32(dgvPetList.SelectedRows[0].Cells["ID"].Value);
+            new AdoptionApplicationForm(petId, currentUserID).ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ApplicationStatus status = new ApplicationStatus();
+            status.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin form = new frmLogin();
+            form.ShowDialog();
         }
     }
 }

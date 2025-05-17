@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace LibrarySystem
 {
-    public partial class frmLogin : Form
+    public partial class frmLogin : Form    
     {
 
         static MySqlConnection conn = new MySqlConnection("server = localhost; user = root; database = animaldb; password =");
@@ -92,6 +92,11 @@ namespace LibrarySystem
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form2 registration = new Form2();
             this.Hide();

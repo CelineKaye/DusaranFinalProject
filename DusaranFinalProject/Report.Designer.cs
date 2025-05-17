@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.statusFilter = new System.Windows.Forms.ComboBox();
+            this.startDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.endDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.generateBtn = new System.Windows.Forms.Button();
+            this.exportBtn = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.dgvReports = new System.Windows.Forms.DataGridView();
+            this.backBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReports)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,29 +51,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Filter by:";
             // 
-            // comboBox1
+            // statusFilter
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(64, 65);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.statusFilter.FormattingEnabled = true;
+            this.statusFilter.Items.AddRange(new object[] {
+            "Approved",
+            "Rejected",
+            "Pending"});
+            this.statusFilter.Location = new System.Drawing.Point(64, 67);
+            this.statusFilter.Name = "statusFilter";
+            this.statusFilter.Size = new System.Drawing.Size(248, 21);
+            this.statusFilter.TabIndex = 1;
             // 
-            // comboBox2
+            // startDate
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(191, 65);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 2;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(318, 67);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 3;
+            this.startDate.Location = new System.Drawing.Point(318, 67);
+            this.startDate.Name = "startDate";
+            this.startDate.Size = new System.Drawing.Size(200, 20);
+            this.startDate.TabIndex = 3;
             // 
             // label2
             // 
@@ -84,13 +79,12 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "to";
             // 
-            // dateTimePicker2
+            // endDate
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(546, 67);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 3;
-            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            this.endDate.Location = new System.Drawing.Point(546, 67);
+            this.endDate.Name = "endDate";
+            this.endDate.Size = new System.Drawing.Size(200, 20);
+            this.endDate.TabIndex = 3;
             // 
             // label3
             // 
@@ -101,50 +95,62 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Adoption Reports";
             // 
-            // button1
+            // generateBtn
             // 
-            this.button1.Location = new System.Drawing.Point(222, 108);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(167, 29);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Generate Report";
-            this.button1.UseVisualStyleBackColor = true;
+            this.generateBtn.Location = new System.Drawing.Point(222, 108);
+            this.generateBtn.Name = "generateBtn";
+            this.generateBtn.Size = new System.Drawing.Size(167, 29);
+            this.generateBtn.TabIndex = 6;
+            this.generateBtn.Text = "Generate Report";
+            this.generateBtn.UseVisualStyleBackColor = true;
+            this.generateBtn.Click += new System.EventHandler(this.generateBtn_Click);
             // 
-            // button2
+            // exportBtn
             // 
-            this.button2.Location = new System.Drawing.Point(395, 108);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(167, 29);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Export to PDF";
-            this.button2.UseVisualStyleBackColor = true;
+            this.exportBtn.Location = new System.Drawing.Point(395, 108);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(167, 29);
+            this.exportBtn.TabIndex = 7;
+            this.exportBtn.Text = "Export to PDF";
+            this.exportBtn.UseVisualStyleBackColor = true;
             // 
             // dgvReports
             // 
             this.dgvReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReports.Location = new System.Drawing.Point(191, 215);
+            this.dgvReports.Location = new System.Drawing.Point(64, 159);
             this.dgvReports.Name = "dgvReports";
-            this.dgvReports.Size = new System.Drawing.Size(357, 150);
+            this.dgvReports.Size = new System.Drawing.Size(682, 206);
             this.dgvReports.TabIndex = 8;
+            // 
+            // backBtn
+            // 
+            this.backBtn.Location = new System.Drawing.Point(64, 371);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(167, 29);
+            this.backBtn.TabIndex = 9;
+            this.backBtn.Text = "Back";
+            this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 407);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.dgvReports);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.exportBtn);
+            this.Controls.Add(this.generateBtn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.endDate);
+            this.Controls.Add(this.startDate);
+            this.Controls.Add(this.statusFilter);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Report";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report";
-            this.Load += new System.EventHandler(this.Report_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReports)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -154,15 +160,15 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox statusFilter;
+        private System.Windows.Forms.DateTimePicker startDate;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker endDate;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button generateBtn;
+        private System.Windows.Forms.Button exportBtn;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataGridView dgvReports;
+        private System.Windows.Forms.Button backBtn;
     }
 }

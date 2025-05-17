@@ -69,7 +69,8 @@ namespace DusaranFinalProject
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 dgvPets.DataSource = dt;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -131,7 +132,7 @@ namespace DusaranFinalProject
             string status = txtStatus.Text;
             string breed = txtBreed.Text;
 
-            
+
 
             try
             {
@@ -145,7 +146,8 @@ namespace DusaranFinalProject
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Pet successfully added.");
                 LoadPets();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -169,5 +171,98 @@ namespace DusaranFinalProject
                 txtStatus.Text = row.Cells["Status"].Value.ToString();
             }
         }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            if (selectedPet == -1)
+            {
+                MessageBox.Show("Please select a pet to update.", "No pet found");
+                return;
+            }
+
+            string query = "UPDATE pets SET Name = @name, Type = @type, Status = @status, Breed = @breed WHERE ID = @id";
+
+            try
+            {
+                conn.Open();
+                cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", txtID.Text);
+                cmd.Parameters.AddWithValue("@name", txtName.Text);
+                cmd.Parameters.AddWithValue("@type", txtType.Text);
+                cmd.Parameters.AddWithValue("@status", txtStatus.Text);
+                cmd.Parameters.AddWithValue("@breed", txtBreed.Text);
+
+                int result = cmd.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Pet successfully updated.");
+                    LoadPets();
+                    txtID.Text = "";
+                    txtName.Text = "";
+                    txtType.Text = "";
+                    txtStatus.Text = "";
+                    txtBreed.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Error updating pet.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            if (selectedPet == -1)
+            {
+                MessageBox.Show("Please select a pet to update.", "No pet found");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this information?", "Remove Pet Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                string query = "DELETE FROM pets WHERE ID = @id";
+                try
+                {
+                    conn.Open();
+                    cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", txtID.Text);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Pet successfully deleted.");
+                        LoadPets();
+                        txtID.Text = "";
+                        txtName.Text = "";
+                        txtType.Text = "";
+                        txtStatus.Text = "";
+                        txtBreed.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error deleting pet.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
     }
 }
+

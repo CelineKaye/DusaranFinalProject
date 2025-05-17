@@ -34,19 +34,16 @@
             this.txtType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtBreed = new System.Windows.Forms.TextBox();
             this.txtStatus = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dgvPets = new System.Windows.Forms.DataGridView();
             this.backBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.updateBtn = new System.Windows.Forms.Button();
+            this.deleteBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPets)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +60,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 61);
+            this.label2.Location = new System.Drawing.Point(52, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 1;
@@ -71,24 +68,28 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(115, 54);
+            this.txtName.Location = new System.Drawing.Point(115, 87);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(121, 20);
+            this.txtName.Size = new System.Drawing.Size(226, 20);
             this.txtName.TabIndex = 2;
             this.txtName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txtType
             // 
             this.txtType.FormattingEnabled = true;
-            this.txtType.Location = new System.Drawing.Point(115, 80);
+            this.txtType.Items.AddRange(new object[] {
+            "Cat",
+            "Dog",
+            "Type ko si celine"});
+            this.txtType.Location = new System.Drawing.Point(115, 113);
             this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(121, 21);
+            this.txtType.Size = new System.Drawing.Size(226, 21);
             this.txtType.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 84);
+            this.label3.Location = new System.Drawing.Point(75, 116);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 4;
@@ -98,26 +99,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 115);
+            this.label4.Location = new System.Drawing.Point(69, 143);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 5;
             this.label4.Text = "Status:";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(31, 141);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Upload Photo:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(260, 88);
+            this.label6.Location = new System.Drawing.Point(71, 171);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 7;
@@ -125,45 +116,22 @@
             // 
             // txtBreed
             // 
-            this.txtBreed.Location = new System.Drawing.Point(304, 81);
+            this.txtBreed.Location = new System.Drawing.Point(115, 164);
             this.txtBreed.Name = "txtBreed";
-            this.txtBreed.Size = new System.Drawing.Size(100, 20);
+            this.txtBreed.Size = new System.Drawing.Size(226, 20);
             this.txtBreed.TabIndex = 8;
             // 
             // txtStatus
             // 
             this.txtStatus.FormattingEnabled = true;
-            this.txtStatus.Location = new System.Drawing.Point(115, 107);
+            this.txtStatus.Items.AddRange(new object[] {
+            "Available",
+            "Unavailable"});
+            this.txtStatus.Location = new System.Drawing.Point(115, 140);
             this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(121, 21);
+            this.txtStatus.Size = new System.Drawing.Size(226, 21);
             this.txtStatus.TabIndex = 9;
             this.txtStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(221, 230);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 11;
-            this.textBox4.Text = "Update";
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(327, 230);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 12;
-            this.textBox5.Text = "Delete";
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(115, 134);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(121, 90);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
             // 
             // dgvPets
             // 
@@ -197,47 +165,66 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(304, 54);
+            this.txtID.Location = new System.Drawing.Point(115, 61);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(100, 20);
+            this.txtID.Size = new System.Drawing.Size(226, 20);
             this.txtID.TabIndex = 17;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(277, 57);
+            this.label7.Location = new System.Drawing.Point(88, 64);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 13);
             this.label7.TabIndex = 18;
             this.label7.Text = "ID:";
+            // 
+            // updateBtn
+            // 
+            this.updateBtn.Location = new System.Drawing.Point(223, 227);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.Size = new System.Drawing.Size(98, 23);
+            this.updateBtn.TabIndex = 19;
+            this.updateBtn.Text = "Update";
+            this.updateBtn.UseVisualStyleBackColor = true;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Location = new System.Drawing.Point(327, 227);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(98, 23);
+            this.deleteBtn.TabIndex = 20;
+            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // Masterfiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(473, 453);
+            this.Controls.Add(this.deleteBtn);
+            this.Controls.Add(this.updateBtn);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.dgvPets);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.txtBreed);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtType);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Masterfiles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Masterfiles";
             this.Load += new System.EventHandler(this.Masterfiles_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPets)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -252,17 +239,15 @@
         private System.Windows.Forms.ComboBox txtType;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtBreed;
         private System.Windows.Forms.ComboBox txtStatus;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dgvPets;
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button updateBtn;
+        private System.Windows.Forms.Button deleteBtn;
     }
 }

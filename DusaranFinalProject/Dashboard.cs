@@ -27,12 +27,9 @@ namespace DusaranFinalProject
         }
 
         private void barrowsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int petId = 1;   // Replace with the actual selected pet ID
-            int userId = 1;  // Replace with the actual logged-in user ID
-
-            AdoptionApplicationForm adoptionApplicationForm = new AdoptionApplicationForm(petId, userId);
-            adoptionApplicationForm.ShowDialog();
+        { 
+            Transaction transaction = new Transaction();
+            transaction.ShowDialog();
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -48,9 +45,20 @@ namespace DusaranFinalProject
         }
         private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+             
+        }
+
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
             this.Hide();
             frmLogin login = new frmLogin();
             login.ShowDialog();
+        }
+
+        private void borrowReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Report report = new Report();
+            report.ShowDialog();
         }
     }
 }
